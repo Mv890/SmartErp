@@ -1,13 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routes import auth, company, dashboard
+from routes import auth, company, dashboard, ledger
 
-app = FastAPI(
-    title="SmartERP API",
-    description="Backend foundation for the Tally-inspired SmartERP platform.",
-    version="1.0.0"
-)
+app = FastAPI(title="SmartERP API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -20,6 +16,7 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(company.router)
 app.include_router(dashboard.router)
+app.include_router(ledger.router) 
 
 @app.get("/")
 def health_check():
