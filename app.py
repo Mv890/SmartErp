@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import auth, company, dashboard, ledger, group, inventory, voucher
+
+from routes import auth, company, dashboard, ledger, group, inventory, voucher, billing
 
 app = FastAPI(title="SmartERP API")
 
@@ -12,14 +13,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Register the routers
 app.include_router(auth.router)
 app.include_router(company.router)
 app.include_router(dashboard.router)
 app.include_router(ledger.router)
 app.include_router(group.router)
 app.include_router(inventory.router)
-app.include_router(voucher.router) # <-- Newly added for Day 9
+app.include_router(voucher.router)
+app.include_router(billing.router) # <-- Newly added for Day 11
 
 @app.get("/")
 def health_check():
